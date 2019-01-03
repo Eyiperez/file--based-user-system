@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Eyiperez/file--based-user-system/issues"
   },
-  "homepage": "https://github.com/Eyiperez/file--based-user-system#readme"
+  "homepage": "https://github.com/Eyiperez/file--based-user-system#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
