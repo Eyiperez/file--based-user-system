@@ -39,7 +39,7 @@ const add = (classFile, student, cb) => {
                     currentStudents[i].age = student.age;
                     currentStudents[i].city = student.city;
                     currentStudents[i].grade = student.grade;
-
+                continue
                 } else {
                     currentStudents.push(student);
                 }

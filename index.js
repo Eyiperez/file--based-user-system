@@ -22,13 +22,24 @@ app.get('/class/add', (req, res) => {
     studentObj.age = parseInt(input.age);
     studentObj.city = input.city;
     studentObj.grade = parseInt(input.grade);
-    // console.log(className);
-    classes.add(classFile, studentObj);
+    console.log(className);
 
-    res.json({
-        'added': studentObj,
-        'class': className
-    });
+    if (input.hasOwnProperty('class') === false ||
+        input.hasOwnProperty('name') === false ||
+        input.hasOwnProperty('age') === false ||
+        input.hasOwnProperty('grade') === false ||
+        input.hasOwnProperty('city') === false) {
+        res.json({ error: 'Please fill out all the information for the student' })
+    } else {
+
+        classes.add(classFile, studentObj);
+
+        res.json({
+            'added': studentObj,
+            'class': className
+        });
+    }
+
 });
 
 
