@@ -30,8 +30,23 @@ const load = (classFile, cb) => {
 const add = (classFile, student, cb) => {
     load(classFile, currentStudents => {
         console.log(student);
-        //console.log('current student', currentStudents)
-        currentStudents.push(student);
+        console.log('current student', currentStudents);
+        if (currentStudents.length === 0) {
+            currentStudents.push(student);
+        } else {
+            for (let i = 0; i < currentStudents.length; i++) {
+                if (currentStudents[i].name === student.name) {
+                    currentStudents[i].age = student.age;
+                    currentStudents[i].city = student.city;
+                    currentStudents[i].grade = student.grade;
+
+                } else {
+                    currentStudents.push(student);
+                }
+
+            }
+        }
+
         save(classFile, currentStudents, (err) => {
             cb(err);
         });

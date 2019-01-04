@@ -23,7 +23,6 @@ app.get('/class/add', (req, res) => {
     studentObj.city = input.city;
     studentObj.grade = parseInt(input.grade);
     // console.log(className);
-    // classes.create(className)
     classes.add(classFile, studentObj);
 
     res.json({
