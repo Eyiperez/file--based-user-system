@@ -58,16 +58,14 @@ app.get('/class/list', (req, res) => {
 });
 
 
-// classes.studentsInClass(classFile, data => {
-//     const studentList = JSON.parse(data);
-//     res.json({ 'students': studentList })
-// })
-
-
-
 //List Failing Students
 app.get('/class/listfailing', (req, res) => {
-    res.json({ 'message': 'show list of students failing in class' })
+    const classToFind = req.query.class;
+    const classFile = `classes/${classToFind}.json`
+
+    classes.failingStudents(classFile, classToFind, data => {
+        res.json(data)
+    })
 });
 
 //List Students from a Specific City

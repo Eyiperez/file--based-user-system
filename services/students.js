@@ -36,17 +36,11 @@ const add = (classFile, student, cb) => {
         } else {
             for (let i = 0; i < currentStudents.length; i++) {
                 if (currentStudents[i].name === student.name) {
-                    currentStudents[i].age = student.age;
-                    currentStudents[i].city = student.city;
-                    currentStudents[i].grade = student.grade;
-                continue
-                } else {
-                    currentStudents.push(student);
+                    currentStudents.splice(i, 1)
                 }
-
             }
+            currentStudents.push(student);
         }
-
         save(classFile, currentStudents, (err) => {
             cb(err);
         });
