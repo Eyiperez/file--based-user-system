@@ -2,6 +2,8 @@ const express = require('express');
 
 const classes = require('./services/classes');
 
+const fs = require('fs');
+
 const app = express();
 
 const port = 3000;
@@ -46,8 +48,22 @@ app.get('/class/add', (req, res) => {
 
 //List All Students in a Class
 app.get('/class/list', (req, res) => {
-    res.json({ 'message': 'show list of students per class' })
+    const classToFind = req.query.class;
+    const classFile = `classes/${classToFind}.json`
+
+    classes.studentsInClass(classFile, classToFind, data => {
+        res.json(data)
+    })
+
 });
+
+
+// classes.studentsInClass(classFile, data => {
+//     const studentList = JSON.parse(data);
+//     res.json({ 'students': studentList })
+// })
+
+
 
 //List Failing Students
 app.get('/class/listfailing', (req, res) => {
