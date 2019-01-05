@@ -2,8 +2,6 @@ const express = require('express');
 
 const classes = require('./services/classes');
 
-const fs = require('fs');
-
 const app = express();
 
 const port = 3000;
@@ -13,7 +11,6 @@ app.get('/', (req, res) => {
 });
 
 //Adding Students to a Class
-
 app.get('/class/add', (req, res) => {
 
     const input = req.query;
@@ -41,7 +38,6 @@ app.get('/class/add', (req, res) => {
             'class': className
         });
     }
-
 });
 
 
@@ -54,7 +50,6 @@ app.get('/class/list', (req, res) => {
     classes.studentsInClass(classFile, classToFind, data => {
         res.json(data)
     })
-
 });
 
 
@@ -70,7 +65,13 @@ app.get('/class/listfailing', (req, res) => {
 
 //List Students from a Specific City
 app.get('/class/listfromcity', (req, res) => {
-    res.json({ 'message': 'show students from a class from a specific city' })
+    const classToFind = req.query.class;
+    const classFile = `classes/${classToFind}.json`
+    const city = req.query.city;
+
+    classes.studentsByCity(classFile, classToFind, city, data => {
+        res.json(data)
+    })
 });
 
 app.listen(port, () => {

@@ -15,7 +15,7 @@ const load = (classFile, cb) => {
     console.log('in LOAD!');
     fs.readFile(classFile, 'utf8', (err, data) => {
         if (!data) {
-            cb([])
+            cb([]);
             return;
 
         } else {
@@ -24,7 +24,7 @@ const load = (classFile, cb) => {
             cb(studentData, classFile);
         }
     })
-}
+};
 
 
 const add = (classFile, student, cb) => {
@@ -36,7 +36,7 @@ const add = (classFile, student, cb) => {
         } else {
             for (let i = 0; i < currentStudents.length; i++) {
                 if (currentStudents[i].name === student.name) {
-                    currentStudents.splice(i, 1)
+                    currentStudents.splice(i, 1);
                 }
             }
             currentStudents.push(student);
@@ -45,10 +45,10 @@ const add = (classFile, student, cb) => {
             cb(err);
         });
     })
-}
+};
 
 module.exports = {
     save,
     load,
     add,
-}
+};

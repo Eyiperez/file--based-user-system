@@ -7,47 +7,69 @@ const add = (classFile, student) => {
 
     students.add(classFile, student);
 
-}
+};
 
 const studentsInClass = (classFile, classToFind, cb) => {
     fs.readFile(classFile, 'utf8', (err, data) => {
         if (err) {
             const errorMess = {
                 error: `Class ${classToFind} lol doesnt exist.`
-            }
+            };
             cb(errorMess);
         } else {
-            cb({ 'students': JSON.parse(data) })
+            cb({ 'students': JSON.parse(data) });
         }
 
     });
-}
+};
 
 const failingStudents = (classFile, classToFind, cb) => {
     fs.readFile(classFile, 'utf8', (err, data) => {
         if (err) {
             const errorMess = {
                 error: `Class ${classToFind} lol doesnt exist.`
-            }
+            };
             cb(errorMess);
         } else {
-            const studentList = JSON.parse(data)
-            console.log(studentList)
-            const failingStudentsArr = []
+            const studentList = JSON.parse(data);
+            //console.log(studentList);
+            const failingStudentsArr = [];
             for (let i = 0; i < studentList.length; i++) {
                 if (studentList[i].grade < 50) {
                     failingStudentsArr.push(studentList[i]);
                 }
             }
-            cb({ 'students': failingStudentsArr })
+            cb({ 'students': failingStudentsArr });
         }
 
     });
-}
+};
+
+const studentsByCity = (classFile, classToFind, city, cb) => {
+    fs.readFile(classFile, 'utf8', (err, data) => {
+        if (err) {
+            const errorMess = {
+                error: `Class ${classToFind} lol doesnt exist.`
+            };
+            cb(errorMess);
+        } else {
+            const studentList = JSON.parse(data);
+            //console.log(studentList);
+            const studentsFromCity = [];
+            for (let i = 0; i < studentList.length; i++) {
+                if (studentList[i].city === city) {
+                    studentsFromCity.push(studentList[i]);
+                }
+            }
+            cb({ 'students': studentsFromCity });
+        }
+
+    });
+};
 
 module.exports = {
     add,
     studentsInClass,
-    failingStudents
-
-}
+    failingStudents,
+    studentsByCity
+};
