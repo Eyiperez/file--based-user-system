@@ -33,7 +33,13 @@ const failingStudents = (classFile, classToFind, cb) => {
         } else {
             const studentList = JSON.parse(data)
             console.log(studentList)
-            cb({ 'students': JSON.parse(data) })
+            const failingStudentsArr = []
+            for (let i = 0; i < studentList.length; i++) {
+                if (studentList[i].grade < 50) {
+                    failingStudentsArr.push(studentList[i]);
+                }
+            }
+            cb({ 'students': failingStudentsArr })
         }
 
     });
